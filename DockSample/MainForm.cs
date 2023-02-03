@@ -26,7 +26,7 @@ namespace DockSample
 
             AutoScaleMode = AutoScaleMode.Dpi;
 
-            SetSplashScreen();
+            //SetSplashScreen();
             CreateStandardControls();
 
             showRightToLeft.Checked = (RightToLeft == RightToLeft.Yes);

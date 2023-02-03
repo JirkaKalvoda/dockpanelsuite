@@ -93,6 +93,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get { return m_isFloat; }
                     set { m_isFloat = value; }
                 }
+
+                public string Name { get; set; }
             }
 
             private struct PaneStruct
@@ -269,6 +271,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     xmlOut.WriteAttributeString("AutoHidePortion", content.DockHandler.AutoHidePortion.ToString(CultureInfo.InvariantCulture));
                     xmlOut.WriteAttributeString("IsHidden", content.DockHandler.IsHidden.ToString(CultureInfo.InvariantCulture));
                     xmlOut.WriteAttributeString("IsFloat", content.DockHandler.IsFloat.ToString(CultureInfo.InvariantCulture));
+                    xmlOut.WriteAttributeString("Name", content.Name);
                     xmlOut.WriteEndElement();
                 }
                 xmlOut.WriteEndElement();
@@ -393,6 +396,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     contents[i].AutoHidePortion = Convert.ToDouble(xmlIn.GetAttribute("AutoHidePortion"), CultureInfo.InvariantCulture);
                     contents[i].IsHidden = Convert.ToBoolean(xmlIn.GetAttribute("IsHidden"), CultureInfo.InvariantCulture);
                     contents[i].IsFloat = Convert.ToBoolean(xmlIn.GetAttribute("IsFloat"), CultureInfo.InvariantCulture);
+                    contents[i].Name = xmlIn.GetAttribute("Name");
                     MoveToNextElement(xmlIn);
                 }
 
@@ -602,6 +606,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     content.DockHandler.AutoHidePortion = contents[i].AutoHidePortion;
                     content.DockHandler.IsHidden = true;
                     content.DockHandler.IsFloat = contents[i].IsFloat;
+                    content.Name = contents[i].Name;
                 }
 
                 // Create panes
