@@ -61,10 +61,11 @@ namespace MDITest
         private IDockContent CreateDockContent(string persistString)
         {
             FrmDockContent ret = null;
-            if (persistString == typeof(FrmDockContent).ToString())
-            {
+            //if (persistString == typeof(FrmDockContent).ToString())
+            //{
                 ret = new FrmDockContent();
-            }
+            //}
+            ret.Name = persistString;
             formList.Add(ret);
             return ret;
         }
@@ -98,11 +99,20 @@ namespace MDITest
             sideFormDict.Clear();
             formList.Clear();
             index = 1;
+            // 清理DockContent和Pane
             List<IDockContent> forms = dockPanel1.Contents.ToList();
             for (int i = forms.Count - 1; i >= 0; i--)
             {
                 (forms[i] as FrmDockContent).Dispose();
                 forms.RemoveAt(i);
+            }
+            // FloatWindow是DockContent外面包的一层窗口，需要单独清理，DockWindow固定是5个不用管
+            // 每次读取会多出1-2个空的FloatWindow，如果不清理会指数增长
+            List<FloatWindow> floats = dockPanel1.FloatWindows.ToList();
+            for (int i = floats.Count - 1; i >= 0; i--)
+            {
+                floats[i].Dispose();
+                floats.RemoveAt(i);
             }
         }
 
@@ -164,12 +174,6 @@ namespace MDITest
             FrmDockContent dc = new FrmDockContent();
             dc.Name = "docu " + index.ToString();
             SetDockContent(dc, DockType.Document);
-            //dc.Text = dc.Name;
-            //dc.TabText = dc.Name;
-            //dc.DockAreas = DockAreas.Document | DockAreas.Float;
-            //dc.FormClosing += DocuClosing;
-            //dc.DoubleClick += DockStateChanged;
-            //dc.DockStateChanged += DockStateChanged;
             //bool isShown = false;
             //if (docuFormDict.Count > 0)
             //{

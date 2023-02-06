@@ -7,7 +7,7 @@ namespace WeifenLuo.WinFormsUI.Docking
     public interface IDockContent : IContextMenuStripHost
     {
         DockContentHandler DockHandler { get; }
-        string Name { get; set; }
+        //string Name { get; set; }
         void OnActivated(EventArgs e);
         void OnDeactivate(EventArgs e);
     }

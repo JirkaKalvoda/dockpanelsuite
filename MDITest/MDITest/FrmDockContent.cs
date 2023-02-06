@@ -10,11 +10,6 @@ namespace MDITest
 {
     public class FrmDockContent : DockContent
     {
-        //public IntPtr H
-        //{
-        //    get { return panel1.Handle; }
-        //}
-
         private Panel panel1;
 
         private TextBox textBox1;
@@ -31,7 +26,14 @@ namespace MDITest
 
             this.LocationChanged += FrmDock_LocationChanged;
             FrmDock_LocationChanged(null, null);
+
         }
+
+        protected override string GetPersistString()
+        {
+            return Name;
+        }
+        
 
         private void FrmDock_LocationChanged(object sender, EventArgs e)
         {
