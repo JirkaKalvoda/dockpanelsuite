@@ -31,10 +31,10 @@ namespace MDITest
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.IsMdiContainer = true;
-            var theme = new VS2015LightTheme();
-            dockPanel1.Theme = theme;
+            dockPanel1.Theme = new VS2015LightTheme();
             dockPanel1.DockRightPortion = 250;       // 限定四周窗口的最大宽度
             dockPanel1.DockLeftPortion = 250;        // 限定四周窗口的最大宽度
+            dockPanel1.DefaultFloatWindowSize = new Size(400, 400);
 
             this.Load += Form1_Load;
             buttonDocu.Click += ButtonDocu_Click;
@@ -70,6 +70,11 @@ namespace MDITest
             return ret;
         }
 
+        /// <summary>
+        /// <see cref="DockState"/>和<see cref="DockAreas"/>要在有实例之后才能设置
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="type"></param>
         private void SetDockContent(FrmDockContent dc, DockType type)
         {
             dc.Text = dc.Name;
