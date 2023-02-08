@@ -71,14 +71,15 @@ namespace MDITest
         }
 
         /// <summary>
-        /// <see cref="DockState"/>和<see cref="DockAreas"/>要在有实例之后才能设置
+        /// <see cref="DockState"/>要在有实例之后才能设置
+        /// <br>先修改DockContent.TabText，后修改DockContent.Text，后者变化会触发FloatWindow.Text读取DockContent.TabText</br>
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="type"></param>
         private void SetDockContent(FrmDockContent dc, DockType type)
         {
-            dc.Text = dc.Name;
             dc.TabText = dc.Name;
+            dc.Text = dc.Name;
             switch (type)
             {
                 case DockType.Side:
