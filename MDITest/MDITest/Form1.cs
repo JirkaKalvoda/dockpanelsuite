@@ -49,6 +49,8 @@ namespace MDITest
         private void ResetFloatWindow(FloatWindow fw)
         {
             fw.FormBorderStyle = FormBorderStyle.Sizable;
+            fw.MinimizeBox = true;
+            fw.MaximizeBox = true;
             fw.ShowInTaskbar = true;             // 这句导致不能foreach
             fw.ShowIcon = false;
         }
@@ -95,7 +97,7 @@ namespace MDITest
                 default:
                     break;
             }
-            dc.DoubleClick += DockStateChanged;
+            //dc.DoubleClick += DockStateChanged;
             dc.DockStateChanged += DockStateChanged;
         }
 

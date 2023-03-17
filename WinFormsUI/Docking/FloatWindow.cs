@@ -191,7 +191,15 @@ namespace WeifenLuo.WinFormsUI.Docking
                     {
                         if (IsDisposed)
                             return;
-
+                        if (m.WParam.ToInt32() == 0x08)
+                        {
+                            break;
+                        }
+                        /* 点击最小化按钮会大几率触发拖拽逻辑导致不会最小化，最大化完全正常，为什么我也没看懂，
+                         * 但是点击标题栏多个位置发现WParam比较稳定，所以可以在前面通过WParam特殊处理最小化
+                         * 标题栏左边框0x0a；标题栏右边框0x0b；标题栏上边框0x0c；标题栏大部分区域0x02；最小化0x08；最大化0x09；关闭0x14
+                         * LParam是坐标，低2字节是X，高2字节是Y，相对于屏幕左上角
+                         */
                         uint result = Win32Helper.IsRunningOnMono ? 0 : NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
                         if (result == 2 && DockPanel.AllowEndUserDocking && this.AllowEndUserDocking)	// HITTEST_CAPTION
                         {
