@@ -28,8 +28,6 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             m_nestedPanes = new NestedPaneCollection(this);
 
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            ShowInTaskbar = false;
             if (dockPanel.RightToLeft != RightToLeft)
                 RightToLeft = dockPanel.RightToLeft;
             if (RightToLeftLayout != dockPanel.RightToLeftLayout)
@@ -48,7 +46,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
 
             m_dockPanel = dockPanel;
-            Owner = DockPanel.FindForm();
+            
             DockPanel.AddFloatWindow(this);
             if (pane != null)
                 pane.FloatWindow = this;
@@ -57,6 +55,19 @@ namespace WeifenLuo.WinFormsUI.Docking
             {
                 Font = dockPanel.Font;
             }
+
+            if (dockPanel.IsFloatWindowSetOwner)
+            {
+                ShowInTaskbar = false;
+                Owner = DockPanel.FindForm();
+            }
+            else
+            {
+                ShowInTaskbar = true;
+                Owner = null;
+            }
+            this.ShowIcon = dockPanel.IsFloatWindowShowIcon;
+            this.FormBorderStyle = dockPanel.FloatWindowBorderStyle;
 
             ResumeLayout();
         }

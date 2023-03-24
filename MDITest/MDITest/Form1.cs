@@ -35,6 +35,9 @@ namespace MDITest
             dockPanel1.DockRightPortion = 250;       // 限定四周窗口的最大宽度
             dockPanel1.DockLeftPortion = 250;        // 限定四周窗口的最大宽度
             dockPanel1.DefaultFloatWindowSize = new Size(400, 400);
+            dockPanel1.IsFloatWindowShowIcon = false;
+            dockPanel1.IsFloatWindowSetOwner = false;
+            dockPanel1.FloatWindowBorderStyle = FormBorderStyle.Sizable;
 
             this.Load += Form1_Load;
             buttonDocu.Click += ButtonDocu_Click;
@@ -48,11 +51,11 @@ namespace MDITest
 
         private void ResetFloatWindow(FloatWindow fw)
         {
-            fw.FormBorderStyle = FormBorderStyle.Sizable;
-            fw.MinimizeBox = true;
-            fw.MaximizeBox = true;
-            fw.ShowInTaskbar = true;             // 这句导致不能foreach
-            fw.ShowIcon = false;
+            //fw.FormBorderStyle = FormBorderStyle.Sizable;
+            //fw.MinimizeBox = true;
+            //fw.MaximizeBox = true;
+            //fw.ShowInTaskbar = true;             // 这句导致不能foreach
+            //fw.ShowIcon = false;
         }
 
         /// <summary>

@@ -32,6 +32,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>$(TargetDir)WeifenLuo.WinFormsUI.Docking.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="Docking\Configuration\PatchSection.cs" />
     <Compile Include="Docking\DefaultTheme.cs" />

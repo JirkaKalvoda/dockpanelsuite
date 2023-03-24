@@ -1172,5 +1172,20 @@ namespace WeifenLuo.WinFormsUI.Docking
             old.Parent = null;
             old.Dispose();
         }
+
+        /// <summary>
+        /// 是否设置悬浮窗的Owner为主窗口，如果设置，最小化后悬浮窗没有任务栏图标
+        /// </summary>
+        public bool IsFloatWindowSetOwner { get; set; } = false;
+
+        /// <summary>
+        /// 悬浮窗是否显示图标
+        /// </summary>
+        public bool IsFloatWindowShowIcon { get; set; } = false;
+
+        /// <summary>
+        /// 悬浮窗的边框风格
+        /// </summary>
+        public FormBorderStyle FloatWindowBorderStyle { get; set; } = FormBorderStyle.SizableToolWindow;
     }
 }
