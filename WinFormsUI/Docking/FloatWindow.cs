@@ -68,9 +68,10 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
             this.ShowIcon = dockPanel.IsFloatWindowShowIcon;
             this.FormBorderStyle = dockPanel.FloatWindowBorderStyle;
-
+            //this.KeyPreview = true;
             ResumeLayout();
         }
+        
 
         protected override void Dispose(bool disposing)
         {
@@ -497,6 +498,31 @@ namespace WeifenLuo.WinFormsUI.Docking
                 pane = panes[i].DockTo(nestedPanesTo.Container, prevPanes[i], alignments[i], proportions[i]);
                 panes[i].DockState = nestedPanesTo.DockState;
             }
+        }
+
+        #endregion
+
+        #region 按键事件
+
+        /// <summary>
+        /// 是否全屏
+        /// </summary>
+        public bool IsFullScreen { get; set; } = false;
+
+        /// <summary>
+        /// 窗口不是全屏时的大小状态
+        /// </summary>
+        public FormWindowState PreviousWindowState { get; set; }
+
+        /// <summary>
+        /// 窗口不是全屏时的边框风格
+        /// </summary>
+        public FormBorderStyle PreviousBorderStyle { get; set; }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            DockPanel.OnFloatWindowKeyDown(this, e);
         }
 
         #endregion

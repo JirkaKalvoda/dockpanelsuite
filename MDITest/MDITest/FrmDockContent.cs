@@ -23,11 +23,14 @@ namespace MDITest
             panel1 = new Panel();
             this.Controls.Add(panel1);
             panel1.Dock = DockStyle.Fill;
+            this.KeyPreview = true;
 
-            this.LocationChanged += FrmDock_LocationChanged;
             FrmDock_LocationChanged(null, null);
-
+            
+            this.LocationChanged += FrmDock_LocationChanged;
+            this.KeyDown += FrmDockContent_KeyDown;
         }
+
 
         protected override string GetPersistString()
         {
@@ -40,5 +43,14 @@ namespace MDITest
             textBox1.Text = "0x" + panel1.Handle.ToString("x").PadLeft(16, '0');
             textBox1.Select(0, 0);
         }
+
+        private void FrmDockContent_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.DockState == DockState.Float /*&& e.Modifiers == Keys.Alt && e.KeyCode == Keys.Enter*/)
+            {
+                this.DockPanel.OnFloatWindowKeyDown(this.Pane.FloatWindow, e);
+            }
+        }
+
     }
 }

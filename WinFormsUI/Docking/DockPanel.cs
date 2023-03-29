@@ -1187,5 +1187,17 @@ namespace WeifenLuo.WinFormsUI.Docking
         /// 悬浮窗的边框风格
         /// </summary>
         public FormBorderStyle FloatWindowBorderStyle { get; set; } = FormBorderStyle.SizableToolWindow;
+
+        /// <summary>
+        /// 焦点在FloatWindow时的按键触发事件，具体行为写在自己定义的派生类里
+        /// <br>如果焦点在里面的DockContent上，可以手动调用这个函数，传FloatWindow和按键</br>
+        /// <br>因为FloatWindow是动态生成的，而且不能预知FloatWindow的派生类型，所以逻辑放到DockPanel里了</br>
+        /// </summary>
+        /// <param name="sender">FloatWindow</param>
+        /// <param name="e"></param>
+        public virtual void OnFloatWindowKeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
     }
 }

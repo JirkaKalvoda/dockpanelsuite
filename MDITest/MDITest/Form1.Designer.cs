@@ -35,7 +35,7 @@ namespace MDITest
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.dockPanel1 = new UCDockPanel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +126,7 @@ namespace MDITest
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonLoad;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private UCDockPanel dockPanel1;
     }
 }
 
