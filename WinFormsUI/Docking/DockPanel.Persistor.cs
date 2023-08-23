@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -523,7 +523,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 PaneStruct[] panes;
                 DockWindowStruct[] dockWindows;
                 FloatWindowStruct[] floatWindows;
-                using (var xmlIn = new XmlTextReader(stream) { WhitespaceHandling = WhitespaceHandling.None })
+                using (var xmlIn = new XmlTextReader(stream) { WhitespaceHandling = WhitespaceHandling.None })  // todo bug 这句会连带关闭stream
                 {
                     xmlIn.MoveToContent();
 

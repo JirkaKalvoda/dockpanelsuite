@@ -45,17 +45,21 @@ namespace MDITest
             buttonSave.Click += ButtonSave_Click;
             buttonLoad.Click += ButtonLoad_Click;
             buttonClear.Click += ButtonClear_Click;
-            dockPanel1.DocumentDragged += DocumentDragged;
+            //dockPanel1.DocumentDragged += DocumentDragged;
         }
 
-
+        /// <summary>
+        /// 因为已经写在<see cref="DockPanel"/>和<see cref="FloatWindow"/>里了所以不需要手动调用
+        /// </summary>
+        /// <param name="fw"></param>
+        [Obsolete]
         private void ResetFloatWindow(FloatWindow fw)
         {
-            //fw.FormBorderStyle = FormBorderStyle.Sizable;
-            //fw.MinimizeBox = true;
-            //fw.MaximizeBox = true;
-            //fw.ShowInTaskbar = true;             // 这句导致不能foreach
-            //fw.ShowIcon = false;
+            fw.FormBorderStyle = FormBorderStyle.Sizable;
+            fw.MinimizeBox = true;
+            fw.MaximizeBox = true;
+            fw.ShowInTaskbar = true;             // 这句导致不能foreach
+            fw.ShowIcon = false;
         }
 
         /// <summary>
@@ -101,7 +105,7 @@ namespace MDITest
                     break;
             }
             //dc.DoubleClick += DockStateChanged;
-            dc.DockStateChanged += DockStateChanged;
+            //dc.DockStateChanged += DockStateChanged;
         }
 
         private void ClearDockContents()
@@ -205,6 +209,13 @@ namespace MDITest
             //}
             docuFormDict.Add(dc.Name, dc);
             index += 1;
+            dc.GotFocus += DockContent_GotFocus;
+            dc.Activated += DockContent_Activated;
+            dc.MdiChildActivate += DockContent_MdiChildActivate;
+            dc.MouseClick += DockContent_MouseClick;
+            dc.Pane.IsActivatedChanged += DockPane_IsActivatedChanged;
+            dc.Pane.IsActiveDocumentPaneChanged += DockPane_IsActiveDocumentPaneChanged;
+            dc.DockHandler.ActiveChanged += DockContentHandler_ActiveChanged;
         }
 
 
@@ -233,6 +244,13 @@ namespace MDITest
             //}
             sideFormDict.Add(dc.Name, dc);
             index += 1;
+            dc.GotFocus += DockContent_GotFocus;
+            dc.Activated += DockContent_Activated;
+            dc.MdiChildActivate += DockContent_MdiChildActivate;
+            dc.MouseClick += DockContent_MouseClick;
+            dc.Pane.IsActivatedChanged += DockPane_IsActivatedChanged;
+            dc.Pane.IsActiveDocumentPaneChanged += DockPane_IsActiveDocumentPaneChanged;
+            dc.DockHandler.ActiveChanged += DockContentHandler_ActiveChanged;
         }
 
 
@@ -262,7 +280,7 @@ namespace MDITest
                 index = indextemp > index ? indextemp : index;
             }
             index++;
-            DocumentDragged(dockPanel1, null);
+            //DocumentDragged(dockPanel1, null);
         }
 
 
@@ -288,12 +306,13 @@ namespace MDITest
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete]
         private void DockStateChanged(object sender, EventArgs e)
         {
             FrmDockContent dc = sender as FrmDockContent;
             if (dc.DockState == DockState.Float)
             {
-                ResetFloatWindow(dc.Pane.FloatWindow);
+                //ResetFloatWindow(dc.Pane.FloatWindow);
             }
         }
 
@@ -302,14 +321,52 @@ namespace MDITest
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete]
         private void DocumentDragged(object sender, EventArgs e)
         {
             DockPanel dp = sender as DockPanel;
             List<FloatWindow> fwlist = dp.FloatWindows.ToList();
             for (int i = 0; i < fwlist.Count; ++i)
             {
-                ResetFloatWindow(fwlist[i]);
+                //ResetFloatWindow(fwlist[i]);
             }
         }
+
+
+        private void DockContentHandler_ActiveChanged(object sender, EventArgs e)
+        {
+            ;
+        }
+
+        private void DockContent_MouseClick(object sender, MouseEventArgs e)
+        {
+            ;
+        }
+
+        private void DockContent_Activated(object sender, EventArgs e)
+        {
+            ;
+        }
+
+        private void DockContent_MdiChildActivate(object sender, EventArgs e)
+        {
+            ;
+        }
+
+        private void DockContent_GotFocus(object sender, EventArgs e)
+        {
+            ;
+        }
+
+        private void DockPane_IsActiveDocumentPaneChanged(object sender, EventArgs e)
+        {
+            ;
+        }
+
+        private void DockPane_IsActivatedChanged(object sender, EventArgs e)
+        {
+            ;
+        }
+
     }
 }

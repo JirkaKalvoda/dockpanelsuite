@@ -37,7 +37,11 @@ namespace MDITest
             return Name;
         }
         
-
+        /// <summary>
+        /// 证实内部可见控件不会被销毁重造
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmDock_LocationChanged(object sender, EventArgs e)
         {
             textBox1.Text = "0x" + panel1.Handle.ToString("x").PadLeft(16, '0');
@@ -51,6 +55,6 @@ namespace MDITest
                 this.DockPanel.OnFloatWindowKeyDown(this.Pane.FloatWindow, e);
             }
         }
-
+        
     }
 }

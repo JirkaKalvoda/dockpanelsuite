@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
@@ -716,8 +716,20 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
 
                 m_isActivated = value;
+                ActiveChanged?.Invoke(this, null);
             }
         }
+
+        /*
+         * DockContent.Pane.IsActiveChanged在Pane内获得焦点时触发，但是Pane是动态的，拖拽窗口导致Pane变化，需要随时重新绑定事件，而且绑定多次会触发多次
+         * DockContent.Pane.IsActiveDocumentPaneChanged在切换Pane时触发
+         * GotFocus在生成Pane时触发
+         * Activated在切换到悬浮窗时触发
+         */
+        /// <summary>
+        /// 切换DockContent触发事件
+        /// </summary>
+        public event EventHandler ActiveChanged;
 
         public bool IsDockStateValid(DockState dockState)
         {
