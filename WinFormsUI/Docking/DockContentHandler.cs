@@ -716,7 +716,14 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
 
                 m_isActivated = value;
-                ActiveChanged?.Invoke(this, null);
+                if (value)
+                {
+                    Active?.Invoke(this, null);
+                }
+                else
+                {
+                    Deactive?.Invoke(this, null);
+                }
             }
         }
 
@@ -727,9 +734,15 @@ namespace WeifenLuo.WinFormsUI.Docking
          * Activated在切换到悬浮窗时触发
          */
         /// <summary>
-        /// 切换DockContent触发事件
+        /// 切换DockContent获得焦点触发事件
         /// </summary>
-        public event EventHandler ActiveChanged;
+        public event EventHandler Active;
+
+        /// <summary>
+        /// 切换DockContent丢失焦点触发事件
+        /// </summary>
+        public event EventHandler Deactive;
+
 
         public bool IsDockStateValid(DockState dockState)
         {

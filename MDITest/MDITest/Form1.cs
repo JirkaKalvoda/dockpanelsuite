@@ -215,7 +215,7 @@ namespace MDITest
             dc.MouseClick += DockContent_MouseClick;
             dc.Pane.IsActivatedChanged += DockPane_IsActivatedChanged;
             dc.Pane.IsActiveDocumentPaneChanged += DockPane_IsActiveDocumentPaneChanged;
-            dc.DockHandler.ActiveChanged += DockContentHandler_ActiveChanged;
+            dc.DockHandler.Active += DockContentHandler_Active;
         }
 
 
@@ -250,7 +250,7 @@ namespace MDITest
             dc.MouseClick += DockContent_MouseClick;
             dc.Pane.IsActivatedChanged += DockPane_IsActivatedChanged;
             dc.Pane.IsActiveDocumentPaneChanged += DockPane_IsActiveDocumentPaneChanged;
-            dc.DockHandler.ActiveChanged += DockContentHandler_ActiveChanged;
+            dc.DockHandler.Active += DockContentHandler_Active;
         }
 
 
@@ -333,7 +333,7 @@ namespace MDITest
         }
 
 
-        private void DockContentHandler_ActiveChanged(object sender, EventArgs e)
+        private void DockContentHandler_Active(object sender, EventArgs e)
         {
             ;
         }
