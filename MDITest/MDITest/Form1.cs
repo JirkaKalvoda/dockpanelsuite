@@ -38,6 +38,7 @@ namespace MDITest
             dockPanel1.IsFloatWindowShowIcon = false;
             dockPanel1.IsFloatWindowSetOwner = false;
             dockPanel1.FloatWindowBorderStyle = FormBorderStyle.Sizable;
+            //dockPanel1.IsDocumentAlwaysHighlight = true;
 
             this.Load += Form1_Load;
             buttonDocu.Click += ButtonDocu_Click;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -488,17 +488,21 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 if (ActivePane != null && ActivePane.DockState == DockState.Document)
                     value = ActivePane;
-
-                if (value == null && DockPanel.DockWindows != null)
+                /*
+                 * 这里不知道为什么一定要让Document Pane保持高亮，所以增加开关让DockPanel里只有1个小窗口是高亮
+                 */
+                if (m_dockPanel.IsDocumentAlwaysHighlight)
                 {
-                    if (ActiveDocumentPane == null)
-                        value = DockPanel.DockWindows[DockState.Document].DefaultPane;
-                    else if (ActiveDocumentPane.DockPanel != DockPanel || ActiveDocumentPane.DockState != DockState.Document)
-                        value = DockPanel.DockWindows[DockState.Document].DefaultPane;
-                    else
-                        value = ActiveDocumentPane;
+                    if (value == null && DockPanel.DockWindows != null)
+                    {
+                        if (ActiveDocumentPane == null)
+                            value = DockPanel.DockWindows[DockState.Document].DefaultPane;
+                        else if (ActiveDocumentPane.DockPanel != DockPanel || ActiveDocumentPane.DockState != DockState.Document)
+                            value = DockPanel.DockWindows[DockState.Document].DefaultPane;
+                        else
+                            value = ActiveDocumentPane;
+                    }
                 }
-
                 if (m_activeDocumentPane == value)
                     return;
 
@@ -628,5 +632,10 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (handler != null)
                 handler(this, e);
         }
+
+        /// <summary>
+        /// 是否保持Document总是高亮，即使丢失焦点
+        /// </summary>
+        public bool IsDocumentAlwaysHighlight { get; set; } = false;
     }
 }
